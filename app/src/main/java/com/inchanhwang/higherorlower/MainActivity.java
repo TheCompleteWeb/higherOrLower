@@ -8,30 +8,29 @@ import java.util.Random;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Random randomGenerator = new Random();
-    Integer randomNum = randomGenerator.nextInt(20);
+
+    Integer randomNum;
+
+    public void makeToast(String string){
+        Toast.makeText(MainActivity.this, string ,Toast.LENGTH_SHORT).show();
+    }
 
     public void buttonClick(View view){
-
-
-
-
         EditText textData = (EditText) findViewById(R.id.editText);
 
         Integer myNumber = Integer.parseInt(textData.getText().toString());
 
         if(randomNum == myNumber){
-            Toast.makeText(MainActivity.this, "Your guess is right!" ,Toast.LENGTH_SHORT).show();
+            makeToast("Your guess is right!");
+            Random rand = new Random();
+            randomNum = rand.nextInt(20) + 1;
         } else if (randomNum < myNumber){
-            Toast.makeText(MainActivity.this, "Lower!" ,Toast.LENGTH_SHORT).show();
+            makeToast("Lower");
         } else if (randomNum > myNumber){
-            Toast.makeText(MainActivity.this, "Higher" ,Toast.LENGTH_SHORT).show();
+            makeToast("Higher");
         } else {
-            Toast.makeText(MainActivity.this, "Your guess is wrong!" ,Toast.LENGTH_SHORT).show();
+            makeToast("Your guess is wrong");
         }
-
-
-
 
     }
 
@@ -39,5 +38,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Random randomGenerator = new Random();
+        randomNum = randomGenerator.nextInt(20) + 1;
+
     }
 }
